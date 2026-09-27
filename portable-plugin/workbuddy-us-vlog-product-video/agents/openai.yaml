@@ -1,0 +1,6 @@
+interface:
+  display_name: "美国生活Vlog带货视频"
+  short_description: "从 Excel 商品事实卡制作美区生活 Vlog 视频方案"
+  default_prompt: "Use $us-vlog-product-video to create the next stage from my completed Excel product fact card."
+policy:
+  allow_implicit_invocation: true

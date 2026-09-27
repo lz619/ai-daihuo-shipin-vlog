@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "us-vlog-product-video",
+  "version": "1.0.0",
+  "description": "基于商品 Excel 事实卡生成美国 TikTok Vlog 产品视频，并自动提交、下载和拼接成片。",
+  "author": {
+    "name": "本地团队"
+  }
+}

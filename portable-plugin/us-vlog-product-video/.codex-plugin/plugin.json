@@ -1,0 +1,18 @@
+{
+  "name": "us-vlog-product-video",
+  "version": "0.1.0",
+  "description": "基于商品 Excel 事实卡生成美国 TikTok Vlog 产品视频，并自动提交、下载和拼接成片。",
+  "author": {
+    "name": "本地团队"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "美国 Vlog 产品视频批量制作",
+    "shortDescription": "从 Excel 商品事实到五镜头视频与自动成片。",
+    "longDescription": "基于真实商品资料生成五镜头美国 TikTok Vlog 视频；可通过 Omni 1.1 批量生成、下载并用 FFmpeg 自动拼接。",
+    "developerName": "本地团队",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "请使用美国 Vlog 产品视频 Skill，根据我的 Excel 商品资料创建一个 SKU 视频项目。"
+  }
+}
