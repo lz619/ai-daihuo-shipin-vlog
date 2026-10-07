@@ -1,0 +1,6 @@
+interface:
+  display_name: "趣味带货短视频"
+  short_description: "用强视觉钩子和可演示产品效果策划美区带货视频"
+  default_prompt: "Use $us-fun-commerce-product-video to create a high-retention U.S. product video from my completed Excel: develop and compare three distinct visual hooks, bridge the winner back to the product within the first few seconds, prove the product through a truthful visual demo, ask me for the Buming AI model and resolution, show five first-frame images for review, then continue to video only after I approve."
+policy:
+  allow_implicit_invocation: true

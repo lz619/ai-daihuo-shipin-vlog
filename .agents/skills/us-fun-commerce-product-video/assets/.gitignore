@@ -1,0 +1,3 @@
+# Filled product workbooks and Excel lock files contain local SKU data.
+*.xlsx
+~$*

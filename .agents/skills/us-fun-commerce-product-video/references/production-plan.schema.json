@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "单条趣味带货视频制作计划",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sku", "video_id", "source", "production", "facts", "direction", "references", "shots"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "sku": {"$ref": "#/$defs/text"},
+    "video_id": {"$ref": "#/$defs/text"},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["product_config", "excel_path", "worksheet", "row"],
+      "properties": {
+        "product_config": {"$ref": "#/$defs/text"},
+        "excel_path": {"$ref": "#/$defs/text"},
+        "worksheet": {"const": "产品输入"},
+        "row": {"type": "integer", "minimum": 2}
+      }
+    },
+    "production": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "model", "resolution", "aspect_ratio", "spoken_language"],
+      "properties": {
+        "provider": {"const": "buming-ai"},
+        "model": {"const": "omni-1.1"},
+        "resolution": {"enum": ["720P", "1080P", "4K"]},
+        "aspect_ratio": {"const": "9:16"},
+        "spoken_language": {"const": "en-US"}
+      }
+    },
+    "facts": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/fact"}},
+    "direction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["core_selling_point", "confirmed_pain_point", "target_audience", "life_situation", "hook", "proof", "purchase_reason", "vlog"],
+      "properties": {
+        "core_selling_point": {"$ref": "#/$defs/claim"},
+        "confirmed_pain_point": {"$ref": "#/$defs/claim"},
+        "target_audience": {"$ref": "#/$defs/claim"},
+        "life_situation": {"$ref": "#/$defs/text"},
+        "hook": {
+          "type": "object", "additionalProperties": false,
+          "required": ["behavior", "humor_source", "bridge_to_product", "muted_readable"],
+          "properties": {
+            "behavior": {"$ref": "#/$defs/text"}, "humor_source": {"$ref": "#/$defs/text"},
+            "bridge_to_product": {"$ref": "#/$defs/text"}, "muted_readable": {"type": "boolean"}
+          }
+        },
+        "proof": {
+          "type": "object", "additionalProperties": false, "required": ["method", "fact_ids"],
+          "properties": {"method": {"$ref": "#/$defs/text"}, "fact_ids": {"$ref": "#/$defs/ids"}}
+        },
+        "purchase_reason": {"$ref": "#/$defs/claim"},
+        "vlog": {
+          "type": "object", "additionalProperties": false,
+          "required": ["creator", "wardrobe", "setting", "lighting", "camera_style", "continuity"],
+          "properties": {
+            "creator": {"$ref": "#/$defs/text"}, "wardrobe": {"$ref": "#/$defs/text"},
+            "setting": {"$ref": "#/$defs/text"}, "lighting": {"$ref": "#/$defs/text"},
+            "camera_style": {"$ref": "#/$defs/text"}, "continuity": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "references": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/reference"}},
+    "shots": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/shot"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "claim": {
+      "type": "object", "additionalProperties": false, "required": ["text", "fact_ids"],
+      "properties": {"text": {"$ref": "#/$defs/text"}, "fact_ids": {"$ref": "#/$defs/ids"}}
+    },
+    "fact": {
+      "type": "object", "additionalProperties": false, "required": ["id", "text", "source_fields", "source_images"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "text": {"$ref": "#/$defs/text"},
+        "source_fields": {"type": "array", "uniqueItems": true, "items": {"enum": ["产品名称", "产品信息", "卖点", "产品图片"]}},
+        "source_images": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}}
+      }
+    },
+    "reference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "path", "locks", "pose_master", "angle_degrees", "body_and_connection_visible"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "kind": {"enum": ["product", "anchor"]},
+        "path": {"$ref": "#/$defs/text"}, "locks": {"$ref": "#/$defs/text"},
+        "pose_master": {"type": "boolean"}, "angle_degrees": {"type": ["number", "null"], "minimum": 0, "maximum": 180},
+        "body_and_connection_visible": {"type": "boolean"}
+      }
+    },
+    "shot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "role", "visual", "main_action", "start_state", "end_state", "visible_product_parts", "continuity", "camera", "vlog_detail", "fact_ids", "dialogue", "delivery", "product_visible", "reveal_offset_seconds", "duration_seconds", "edit_duration_seconds", "trim_start_seconds", "spatial_relation", "pose_master_ref", "reference_ids", "first_frame", "static_prompt", "acceptance_checks", "motion_prompt"],
+      "properties": {
+        "id": {"enum": ["S01", "S02", "S03", "S04", "S05"]},
+        "role": {"enum": ["hook", "bridge", "use", "proof", "cta"]},
+        "visual": {"$ref": "#/$defs/text"}, "main_action": {"$ref": "#/$defs/text"},
+        "start_state": {"$ref": "#/$defs/text"}, "end_state": {"$ref": "#/$defs/text"},
+        "visible_product_parts": {"$ref": "#/$defs/text"}, "continuity": {"$ref": "#/$defs/text"},
+        "camera": {"$ref": "#/$defs/text"}, "vlog_detail": {"$ref": "#/$defs/text"},
+        "fact_ids": {"$ref": "#/$defs/ids"}, "dialogue": {"$ref": "#/$defs/text"},
+        "delivery": {"enum": ["on_camera", "voiceover"]}, "product_visible": {"type": "boolean"},
+        "reveal_offset_seconds": {"type": ["number", "null"], "minimum": 0},
+        "duration_seconds": {"type": "integer", "minimum": 3, "maximum": 10},
+        "edit_duration_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "trim_start_seconds": {"type": "number", "minimum": 0},
+        "spatial_relation": {"enum": ["none", "installation", "insertion", "clamping", "magnetic", "snap", "sleeving", "connection", "support", "rotation"]},
+        "pose_master_ref": {"type": ["string", "null"], "minLength": 1},
+        "reference_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+        "first_frame": {"$ref": "#/$defs/text"}, "static_prompt": {"$ref": "#/$defs/text"},
+        "acceptance_checks": {"$ref": "#/$defs/ids"}, "motion_prompt": {"type": "string"}
+      }
+    }
+  }
+}
